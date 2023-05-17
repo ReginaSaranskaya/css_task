@@ -1,3 +1,8 @@
+import { getItemList } from './api';
+import { getLikeIcon, debounce } from './helpers';
+
+import './assets/styles/style.css';
+
 const renderList = (list) => {
   const listContainer = document.querySelector(".catalog");
 
@@ -20,16 +25,19 @@ const renderList = (list) => {
 const search = (list) => {
   const searchInput = document.querySelector("#search");
 
-  searchInput.addEventListener('input', (e) => {
-    e.stopPropagation();
+  const handleInput = (e) => {
     const searchValue = e.target.value.trim().toLowerCase();
     const filteredList = list.filter(({name}) => name.toLowerCase().includes(searchValue));
+
     renderList(filteredList);
-  });
+  }
+
+  const debounceHandle = debounce(handleInput, 200);
+
+  searchInput.addEventListener('input', debounceHandle);
 }
 
-
-fetchItems().then((list) => {
+getItemList().then((list) => {
   renderList(list);
   search(list);
 });

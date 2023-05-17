@@ -1,11 +1,11 @@
-async function fetchItems() {
-  const response = await fetch("http://localhost:3006/items");
+export async function getItemList() {
+  const response = await fetch(`${process.env.API_URL}/items`);
 
   return await response.json();
 }
 
-async function fetchItem() {
-  const response = await fetch("http://localhost:3006/items/1")
+export async function getItem(id = 1) {
+  const response = await fetch(`${process.env.API_URL}/items/${id}`);
 
   return await response.json();
 }

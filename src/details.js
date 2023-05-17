@@ -1,5 +1,10 @@
+import { getItem } from './api';
+import { getLikeIcon } from './helpers';
+
+import './assets/styles/style.css';
+
 const renderItem = (item) => {
-  const itemContainer = document.querySelector(".product")
+  const itemContainer = document.querySelector(".product");
 
   itemContainer.innerHTML = `<div class="product__view">
                 <div class="product__wrapper-image">
@@ -28,4 +33,4 @@ const renderItem = (item) => {
             </div>`;
 }
 
-fetchItem().then((item) => renderItem(item));
+getItem().then((item) => renderItem(item));
